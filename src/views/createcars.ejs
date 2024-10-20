@@ -1,0 +1,110 @@
+<%- include('partials/header') %>
+  <%- include('partials/navbar') %>
+    <div class="container mt-5 px-5">
+      <div class="row no-gutter">
+        <div>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Cars</a></li>
+              <li class="breadcrumb-item"><a href="cars">List Car</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Add New Car</li>
+            </ol>
+          </nav>
+        </div>
+        <div>
+          <h2>Add New Car</h2>
+        </div>
+        <div>
+          <% if (messages.error) { %>
+            <div class="alert alert-danger d-flex align-items-center fade show" data-timeout="2000" role="alert">
+              <i class="fa-solid fa-triangle-exclamation text-danger me-2" role="img" aria-label="Error:"></i>
+              <div>
+                <%= messages.error %>
+              </div>
+            </div>
+        </div>
+        <% } %>
+
+          <% if (messages.success) { %>
+            <div class="alert alert-success d-flex align-items-center fade show" data-timeout="2000" role="alert">
+              <i class="fa-solid fa-circle-check text-success me-2" role="img" aria-label="Success:"></i>
+              <div>
+                <%= messages.success %>
+              </div>
+            </div>
+      </div>
+      <% } %>
+    </div>
+    <div class="form">
+      <form method="POST" action="/cars" enctype="multipart/form-data">
+        <div class="form-group bg-white p-4 rounded">
+          <div class="row mb-3">
+            <label for="nama" class="col-sm-2 col-form-label required">Nama</label>
+            <div class="col-sm-10 col-md-5">
+              <input type="text" class="form-control" id="nama" placeholder="Input Car Name" name="name" required />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="nama" class="col-sm-2 col-form-label required">Size</label>
+            <div class="col-sm-10 col-md-5">
+              <select class="form-select" name="size" aria-label="Default select example">
+                <option selected hidden>Select Size</option>
+                <option value="1">Small</option>
+                <option value="2">Medium</option>
+                <option value="3">Large</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="harga" class="col-sm-2 col-form-label required">Harga</label>
+            <div class="col-sm-10 col-md-5">
+              <input type="number" class="form-control" id="harga" placeholder="Input price" name="rentPerDay"
+                required />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="foto" class="col-sm-2 col-form-label required">Foto</label>
+            <div class="col-sm-10 col-md-5">
+              <input type="file" class="form-control" id="foto" name="image" aria-describedby="fotoHelp" required />
+              <div id="fotoHelp" class="form-text">
+                <!-- File size max 2MB -->
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="startRent" class="col-sm-2 col-form-label">Start Rent</label>
+            <div class="col-sm-10 col-md-5 align-self-center">
+              <span>-</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="finishRent" class="col-sm-2 col-form-label">Finish Rent</label>
+            <div class="col-sm-10 col-md-5 align-self-center">
+              <span>-</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="createdAt" class="col-sm-2 col-form-label">Created at</label>
+            <div class="col-sm-10 col-md-5 align-self-center">
+              <span>-</span>
+            </div>
+          </div>
+          <div class="row">
+            <label for="updatedAt" class="col-sm-2 col-form-label">Updated at</label>
+            <div class="col-sm-10 col-md-5 align-self-center">
+              <span>-</span>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary-blue-border me-2 my-3" onclick="window.location.href='/cars'">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary-blue my-3">
+          Save
+        </button>
+      </form>
+    </div>
+    </div>
+    </div>
+
+    <%- include('partials/footer') %>

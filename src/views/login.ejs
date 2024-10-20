@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="container-fluid px-0 overflow-x-hidden overflow-y-hidden">
+    <div class="row">
+      <div class="col-md-8">
+        <img src="img/image1.png" alt="" class="img-fluid bg-primary" />
+      </div>
+      <div class="col-md-4 bg-white" style="place-content: center">
+        <div class="container-md">
+          <div class="component-signin px-md-5">
+            <img src="img/Rectangle_logo.png" />
+            <h2 class="pt-4">Welcome, Admin BCR</h2>
+            <div>
+              <% if (messages.error) { %>
+                <div class="alert alert-danger d-flex align-items-center fade show" data-timeout="2000" role="alert">
+                  <i class="fa-solid fa-triangle-exclamation text-danger me-2" role="img" aria-label="Error:"></i>
+                  <div>
+                    <%= messages.error %>
+                  </div>
+                </div>
+            </div>
+            <% } %>
+              <div>
+                <% if (messages.success) { %>
+                  <div class="alert alert-dark d-flex align-items-center fade show" data-timeout="2000" role="alert">
+                    <i class="fa-solid fa-circle-check me-2" role="img" aria-label="Success:"></i>
+                    <div>
+                      <%= messages.success %>
+                    </div>
+                  </div>
+              </div>
+              <% } %>
+
+                <div class="form-class">
+                  <form action="/users/login" method="post">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
+                        required />
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Enter your password" required />
+                    </div>
+                    <div>
+                      <a href="/register" class="text-primary">Don't have an account yet? Register</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width mt-3">
+                      Login
+                    </button>
+                  </form>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <% include('partials/footer') %>

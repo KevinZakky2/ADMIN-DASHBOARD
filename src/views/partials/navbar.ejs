@@ -1,0 +1,92 @@
+<body>
+  <div class="wrapper">
+    <aside id="sidebar" class="js-sidebar">
+      <div class="component d-flex">
+        <div class="h-100 bg-secondary-color__blue">
+          <div class="text-center p-4">
+            <img src="img/Rectangle63.png" alt="" />
+          </div>
+          <ul class="sidebar-nav mt-3">
+            <li class="sidebar-item">
+              <a
+                href="#"
+                class="aside-sidebar-link d-flex flex-column align-items-center"
+              >
+                <i class="fa-solid fa-home"></i>
+                <p class="mt-2">Dashboard</p>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a
+                href="#"
+                class="aside-sidebar-link active d-flex flex-column align-items-center"
+              >
+                <i class="fa-solid fa-truck"></i>
+                <p class="mt-2">Cars</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="h-100 w-100">
+          <div class="text-start p-4">
+            <a href="#"><img src="img/Rectangle_logo.png" alt="" /></a>
+          </div>
+          <ul class="sidebar-nav">
+            <li class="text-secondary sidebar-header fw-bold ps-4">
+              <span> CARS </span>
+            </li>
+            <li class="sidebar-item active ps-4 py-2">
+              <a href="#" class="sidebar-link"> List Car </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <div class="main">
+      <nav class="navbar navbar-expand px-3 border-bottom bg-white">
+        <button class="btn" id="sidebar-toggle" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse navbar">
+          <ul class="navbar-nav">
+            <form class="d-flex navbar-nav me-4" role="search">
+              <div class="input-group">
+                <span
+                  class="input-group-text border-secondary-subtle bg-white pe-0"
+                  id="basic-addon1"
+                >
+                  <i class="fa-solid fa-search text-secondary"></i>
+                </span>
+                <input
+                  class="form-control rounded-0 border-secondary-subtle border-start-0"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+              <button class="btn btn-primary-blue-border" type="submit">
+                Search
+              </button>
+            </form>
+            <li class="nav-item dropdown">
+              <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                <img
+                  src="img/image2.png"
+                  class="avatar img-fluid rounded"
+                  alt=""
+                />
+                <span>Admin</span>
+                <i class="fa-solid fa-angle-down"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a href="#" class="btn dropdown-item"><span>Profile</span></a>
+                <a href="#" class="btn dropdown-item"><span>Setting</span></a>
+                <form action="/users/logout" method="post">
+                  <button type="submit" class="dropdown-item"><span>Logout</span></button>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>

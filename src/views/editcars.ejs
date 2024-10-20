@@ -1,0 +1,249 @@
+<%- include('partials/header') %>
+
+<body>
+  <div class="wrapper">
+    <aside id="sidebar" class="js-sidebar">
+      <div class="component d-flex">
+        <div class="h-100 bg-secondary-color__blue">
+          <div class="text-center p-4">
+            <img src="../../img/Rectangle63.png" alt="" />
+          </div>
+          <ul class="sidebar-nav mt-3">
+            <li class="sidebar-item">
+              <a
+                href="#"
+                class="aside-sidebar-link d-flex flex-column align-items-center"
+              >
+                <i class="fa-solid fa-home"></i>
+                <p class="mt-2">Dashboard</p>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a
+                href="#"
+                class="aside-sidebar-link active d-flex flex-column align-items-center"
+              >
+                <i class="fa-solid fa-truck"></i>
+                <p class="mt-2">Cars</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="h-100 w-100">
+          <div class="text-start p-4">
+            <a href="#"><img src="../../img/Rectangle_logo.png" alt="" /></a>
+          </div>
+          <ul class="sidebar-nav">
+            <li class="text-secondary sidebar-header fw-bold ps-4">
+              <span> CARS </span>
+            </li>
+            <li class="sidebar-item active ps-4 py-2">
+              <a href="#" class="sidebar-link"> List Car </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <div class="main">
+      <nav class="navbar navbar-expand px-3 border-bottom bg-white">
+        <button class="btn" id="sidebar-toggle" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse navbar">
+          <ul class="navbar-nav">
+            <form class="d-flex navbar-nav me-4" role="search">
+              <div class="input-group">
+                <span
+                  class="input-group-text border-secondary-subtle bg-white pe-0"
+                  id="basic-addon1"
+                >
+                  <i class="fa-solid fa-search text-secondary"></i>
+                </span>
+                <input
+                  class="form-control rounded-0 border-secondary-subtle border-start-0"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+              <button class="btn btn-primary-blue-border" type="submit">
+                Search
+              </button>
+            </form>
+            <li class="nav-item dropdown">
+              <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                <img
+                  src="../../img/image2.png"
+                  class="avatar img-fluid rounded"
+                  alt=""
+                />
+                <span>Admin</span>
+                <i class="fa-solid fa-angle-down"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a href="#" class="btn dropdown-item"><span>Profile</span></a>
+                <a href="#" class="btn dropdown-item"><span>Setting</span></a>
+                <form action="/users/logout" method="post">
+                  <button type="submit" class="dropdown-item">
+                    <span>Logout</span>
+                  </button>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container mt-5 px-5">
+        <div class="row no-gutter">
+          <div>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Cars</a></li>
+                <li class="breadcrumb-item"><a href="cars">List Car</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Edit Car
+                </li>
+              </ol>
+            </nav>
+          </div>
+          <div><h2>Edit Car</h2></div>
+          <div class="form">
+            <form
+              method="POST"
+              action="/cars/<%= car.id %>"
+              enctype="multipart/form-data"
+            >
+              <div class="form-group bg-white p-4 rounded">
+                <div class="row mb-3">
+                  <label for="nama" class="col-sm-2 col-form-label required"
+                    >Nama</label
+                  >
+                  <div class="col-sm-10 col-md-5">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nama"
+                      placeholder="Input Car Name"
+                      name="name"
+                      value="<%= car.name %>"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="nama" class="col-sm-2 col-form-label required"
+                    >Size</label
+                  >
+                  <div class="col-sm-10 col-md-5">
+                    <select
+                      class="form-select"
+                      name="size"
+                      aria-label="Default select example"
+                    >
+                      <% if(car.size == "Small") { %>
+                      <option value="Small" selected>Small</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Large">Large</option>
+                      <% } else if(car.size === "Medium") { %>
+                      <option value="Small">Small</option>
+                      <option value="Medium" selected>Medium</option>
+                      <option value="Large">Large</option>
+                      <% } else { %>
+                      <option value="Small">Small</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Large" selected>Large</option>
+                      <% }%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="harga" class="col-sm-2 col-form-label required"
+                    >Harga</label
+                  >
+                  <div class="col-sm-10 col-md-5">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="harga"
+                      placeholder="Input price"
+                      name="rentPerDay"
+                      value="<%= car.rentPerDay %>"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="foto" class="col-sm-2 col-form-label required"
+                    >Foto</label
+                  >
+                  <div class="col-sm-10 col-md-5">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="foto"
+                      name="image"
+                      aria-describedby="fotoHelp"
+                      file="<%= car.image %>"
+                      required
+                    />
+                    <div id="fotoHelp" class="form-text">File size max 2MB</div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="startRent" class="col-sm-2 col-form-label"
+                    >Start Rent</label
+                  >
+                  <div class="col-sm-10 col-md-5 align-self-center">
+                    <span
+                      ><% if(car.startRent) { %> <%= car.startRent %> <% } else
+                      { %> - <% } %></span
+                    >
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="finishRent" class="col-sm-2 col-form-label"
+                    >Finish Rent</label
+                  >
+                  <div class="col-sm-10 col-md-5 align-self-center">
+                    <span
+                      ><% if(car.finishRent) { %> <%= car.startRent %> <% } else
+                      { %> - <% } %></span
+                    >
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="createdAt" class="col-sm-2 col-form-label"
+                    >Created at</label
+                  >
+                  <div class="col-sm-10 col-md-5 align-self-center">
+                    <span><%= car.createdAt %></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <label for="updatedAt" class="col-sm-2 col-form-label"
+                    >Updated at</label
+                  >
+                  <div class="col-sm-10 col-md-5 align-self-center">
+                    <span><%= car.updatedAt %></span>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary-blue-border me-2 my-3"
+                onclick="window.location.href='/cars'"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary-blue my-3">
+                Save
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <%- include('partials/footer') %>
+    </div>
+  </div>
+</body>
