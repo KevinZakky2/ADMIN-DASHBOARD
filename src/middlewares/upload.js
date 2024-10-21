@@ -1,7 +1,7 @@
 import multer from "multer";
 import { extname, resolve } from "path";
 
-const uploadDir = resolve("../src/public/upload/");
+const uploadDir = resolve("/src/public/upload/");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
