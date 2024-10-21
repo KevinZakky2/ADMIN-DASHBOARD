@@ -1,5 +1,5 @@
 import multer from "multer";
-import { extname } from "path";
+import { extname, resolve } from "path";
 
 const uploadDir = resolve("../src/public/upload/");
 
