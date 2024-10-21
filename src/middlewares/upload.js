@@ -1,7 +1,14 @@
 import multer from "multer";
 import { extname, resolve } from "path";
+import { existsSync, mkdirSync } from "fs";
 
-const uploadDir = resolve("/src/public/upload/");
+// Gunakan path absolut untuk memastikan direktori yang benar
+const uploadDir = resolve("src/public/upload/");
+
+// Pastikan folder upload ada
+if (!existsSync(uploadDir)) {
+  mkdirSync(uploadDir, { recursive: true });
+}
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
