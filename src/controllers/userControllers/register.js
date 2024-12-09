@@ -3,14 +3,6 @@ import bcrypt from "bcrypt";
 
 export const Register = async (req, res) => {
   const { fullName, email, password, confPassword } = req.body;
-  if (password !== confPassword) {
-    req.flash("error", "Password and confirm password doesn't match");
-    return res.redirect("/register");
-  }
-  if (password.length < 6) {
-    req.flash("error", "Password must have 6 character minimum!");
-    return res.redirect("/register");
-  }
 
   const emailExisted = await userModel.findOne({
     where: {
@@ -23,17 +15,24 @@ export const Register = async (req, res) => {
     return res.redirect("/register");
   }
 
+  if (password.length < 6) {
+    req.flash("error", "Password must have 6 character minimum!");
+    return res.redirect("/register");
+  }
+
+  if (password !== confPassword) {
+    req.flash("error", "Password and confirm password doesn't match");
+    return res.redirect("/register");
+  }
+
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
-  try {
-    await userModel.create({
-      fullName: fullName,
-      email: email,
-      password: hashPassword,
-    });
-    req.flash("success", "Registration successful!");
-    return res.redirect("/");
-  } catch (error) {
-    console.log(error);
-  }
+
+  await userModel.create({
+    fullName: fullName,
+    email: email,
+    password: hashPassword,
+  });
+  req.flash("success", "Registration successful!");
+  return res.redirect("/");
 };

@@ -3,7 +3,7 @@ import { extname, resolve } from "path";
 import { existsSync, mkdirSync } from "fs";
 
 // Gunakan path absolut untuk memastikan direktori yang benar
-const uploadDir = resolve("src/public/upload/");
+const uploadDir = resolve("../src/public/upload/"); //perlu diubah pada saat masuk production
 
 // Pastikan folder upload ada
 if (!existsSync(uploadDir)) {

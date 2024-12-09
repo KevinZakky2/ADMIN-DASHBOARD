@@ -16,12 +16,22 @@ export const editUsers = async (req, res) => {
         message: "User not found",
       });
     }
-    const { fullName, email, password, role = check.role, photoProfile = check.photoProfile } = req.body;
+    const {
+      fullName,
+      email,
+      password,
+      role = check.role,
+      photoProfile = check.photoProfile,
+    } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-  
+
     if (photoProfile != null) {
-      const imagePath = path.join( __dirname, "../public/upload",check.profilePicture);
+      const imagePath = path.join(
+        __dirname,
+        "../public/upload",
+        check.profilePicture
+      );
       fs.unlink(imagePath, (err) => {
         if (err) {
           console.error("Failed to delete image:", err);

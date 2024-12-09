@@ -8,17 +8,6 @@ export const editCar = async (req, res) => {
     const { id } = req.params;
 
     const check = await carModel.findByPk(id);
-
-    if (!check) {
-      req.flash('error', 'Car not found');
-      res.redirect('/cars');
-      // return res.status(404).json({ status: false, message: "Car not found" });
-    }
-    if (!req.file) {
-      req.flash('error', 'File upload failed');
-      res.redirect('/createcars');
-      // return res.status(400).json({ status: false, message: "File upload failed" });
-    }
     const { name, size, rentPerDay, status = check.status, image } = req.body;
 
     if (req.file) {
