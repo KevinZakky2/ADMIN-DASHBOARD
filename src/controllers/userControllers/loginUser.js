@@ -2,6 +2,7 @@ import userModel from "../../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import { AccessDeniedError } from "sequelize";
 
 dotenv.config();
 
@@ -31,6 +32,8 @@ export const loginUser = async (req, res) => {
       }
     );
 
+    console.log(`access token : ${acesstoken}`);
+
     const refreshToken = jwt.sign(
       { id: user.id, email: user.email },
       process.env.REFRESH_TOKEN,
@@ -38,6 +41,8 @@ export const loginUser = async (req, res) => {
         expiresIn: "1d",
       }
     );
+
+    console.log(`refresh token : ${refreshToken}`);
     const loginUser = await userModel.update(
       { refreshToken: refreshToken },
       { where: { id: user.id } }
