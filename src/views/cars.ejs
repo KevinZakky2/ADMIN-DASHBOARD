@@ -1,135 +1,113 @@
 <%- include('partials/header') %>
-<%- include('partials/navbar') %>
-        <div class="container mt-5 px-5">
-          <div class="row no-gutter">
-            <div>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Cars</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">
-                    <a href="#">List Car</a>
-                  </li>
-                </ol>
-              </nav>
-            </div>
-            <div class="d-flex justify-content-between">
-              <h2>List Car</h2>
+  <%- include('partials/navbar') %>
+    <div class="container mt-5 px-5">
+      <div class="row no-gutter">
+        <div>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Cars</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="#">List Car</a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="d-flex justify-content-between">
+          <h2>List Car</h2>
+          <div>
+            <button class="btn btn-primary-blue position-relative" onclick="window.location.href='/createcars'">
+              <i class="fa-solid fa-plus"></i>
+              <span>Add New Car</span>
+            </button>
+          </div>
+        </div>
+        <div>
+          <% if (messages.error) { %>
+            <div class="alert alert-danger d-flex align-items-center fade show" data-timeout="2000" role="alert">
+              <i class="fa-solid fa-triangle-exclamation text-danger me-2" role="img" aria-label="Error:"></i>
               <div>
-                <button
-                  class="btn btn-primary-blue position-relative"
-                  onclick="window.location.href='/createcars'"
-                >
-                  <i class="fa-solid fa-plus"></i>
-                  <span>Add New Car</span>
+                <%= messages.error %>
+              </div>
+            </div>
+        </div>
+        <% } %>
+
+          <% if (messages.success) { %>
+            <div class="alert alert-dark d-flex align-items-center fade show" data-timeout="2000" role="alert">
+              <i class="fa-solid fa-circle-check me-2" role="img" aria-label="Success:"></i>
+              <div>
+                <%= messages.success %>
+              </div>
+            </div>
+      </div>
+      <% } %>
+    </div>
+    <div class="button-group">
+      <button class="btn btn-primary-blue-border-2 btn-filter-car active" value="All">All</button>
+      <button class="btn btn-primary-blue-border-2 btn-filter-car" value="Small">Small</button>
+      <button class="btn btn-primary-blue-border-2 btn-filter-car" value="Medium">Medium</button>
+      <button class="btn btn-primary-blue-border-2 btn-filter-car" value="Large">Large</button>
+    </div>
+    <div class="component-card my-4 d-flex justify-content-center justify-content-md-start flex-wrap"
+      id="container_hasilCariMobil">
+      <% if (cars) { %>
+        <% for(var i=0; i< cars.length; i++){ %>
+          <div class="card box-shadow__low border-0">
+            <div class="container_image my-3">
+              <img src="/upload/<%= cars[i].image %>" class="card-img-top" id="card_imageMobil" alt="carsPhoto" />
+            </div>
+            <div class="card-body">
+              <div class="card-content">
+                <h3 class="card-title">
+                  <%= cars[i].name %>
+                </h3>
+                <% const rentPerDay=new Intl.NumberFormat("in-ID", { maximumSignificantDigits: 10,
+                  }).format(cars[i].rentPerDay); %>
+                  <h4>Rp. <%= rentPerDay %>/hari</h4>
+                  <div class="my-3">
+                    <span>
+                      <i class="fa-regular fa-calendar"></i>
+                      <span>Start rent - Finish rent</span>
+                    </span>
+                    <span>
+                      <i class="fa-regular fa-clock"></i>
+
+                      <span>Update at <%= ` ${cars[i].updatedAt.getDate()}
+                          ${cars[i].updatedAt.toLocaleString('en-us',{month:'short'})}
+                          ${cars[i].updatedAt.getFullYear()},
+                          ${cars[i].updatedAt.getHours()}.${cars[i].updatedAt.getMinutes()}` %></span>
+                    </span>
+                  </div>
+              </div>
+              <div class="d-flex">
+                <button type="button" class="btn btn-outline-danger rounded-0 full-width me-3" data-bs-toggle="modal"
+                  data-bs-target="#deleteCarModal" data-id="<%= cars[i].id %>">
+                  <i class="fa-solid fa-trash"></i>
+                  <span>Delete</span>
+                </button>
+                <button type="submit" class="btn btn-success rounded-0 full-width"
+                  onclick="window.location.href='/cars/<%= cars[i].id %>'">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                  <span>Edit</span>
                 </button>
               </div>
             </div>
-            <div>
-              <% if (messages.error) { %>
-              <div class="alert alert-danger d-flex align-items-center fade show" data-timeout="2000" role="alert">
-                <i class="fa-solid fa-triangle-exclamation text-danger me-2" role="img" aria-label="Error:"></i>
-                  <div>
-                    <%= messages.error %>
-                  </div>
-                </div>
-              </div>
-            <% } %>
-            
-            <% if (messages.success) { %>
-              <div class="alert alert-dark d-flex align-items-center fade show" data-timeout="2000" role="alert">
-                <i class="fa-solid fa-circle-check me-2" role="img" aria-label="Success:"></i>
-                  <div>
-                    <%= messages.success %>
-                  </div>
-                </div>
-              </div>
-            <% } %>
           </div>
-            <div class="button-group">
-              <button class="btn btn-primary-blue-border-2 btn-filter-car active" value="All">All</button>
-              <button class="btn btn-primary-blue-border-2 btn-filter-car" value="Small">Small</button>
-              <button class="btn btn-primary-blue-border-2 btn-filter-car" value="Medium">Medium</button>
-              <button class="btn btn-primary-blue-border-2 btn-filter-car" value="Large">Large</button>
-            </div>
-            <div
-              class="component-card my-4 d-flex justify-content-center justify-content-md-start flex-wrap"
-              id="container_hasilCariMobil"
-            >
-            <% if (cars) { %> 
-              <% for(var i=0; i< cars.length; i++){ %>
-              <div class="card box-shadow__low border-0">
-                <div class="container_image my-3">
-                  <img
-                    src="/upload/<%= cars[i].image %>"
-                    class="card-img-top"
-                    id="card_imageMobil"
-                  />
-                </div>
-                <div class="card-body">
-                  <div class="card-content">
-                    <h6 class="card-title"><%= cars[i].name %></h6>
-                    <% const rentPerDay= new Intl.NumberFormat("in-ID", {
-                      maximumSignificantDigits: 10,
-                    }).format(cars[i].rentPerDay); %>
-                    <h5>Rp. <%= rentPerDay %>/hari</h5>
-                    <div class="my-3">
-                      <span>
-                        <i class="fa-regular fa-calendar"></i>
-                        <span>Start rent - Finish rent</span>
-                      </span>
-                      <span>
-                        <i class="fa-regular fa-clock"></i>
 
-                        <span>Update at <%= ` ${cars[i].updatedAt.getDate()} ${cars[i].updatedAt.toLocaleString('en-us',{month:'short'})} ${cars[i].updatedAt.getFullYear()},  ${cars[i].updatedAt.getHours()}.${cars[i].updatedAt.getMinutes()}` %></span>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="d-flex">
-                    <button
-                      type="button"
-                      class="btn btn-outline-danger rounded-0 full-width me-3"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteCarModal"
-                      data-id="<%= cars[i].id %>"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                    <button
-                      type="submit"
-                      class="btn btn-success rounded-0 full-width"
-                      onclick="window.location.href='/cars/<%= cars[i].id %>'"
-                    >
-                      <i class="fa-regular fa-pen-to-square"></i>
-                      <span>Edit</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              
-            <% } %> <% } %>
-            </div>
-          </div>
-        </div>
-      </div>
+          <% } %>
+            <% } %>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 
-    <div
-      class="modal fade"
-      id="deleteCarModal"
-      tabindex="-1"
-      aria-labelledby="deleteCarModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="deleteCarModal" tabindex="-1" aria-labelledby="deleteCarModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content ">
           <form id="deleteCarForm" action="" method="get" class="text-center">
             <div class="modal-header d-flex justify-content-center border-0">
-              <img
-                src="img/img-BeepBeep.png"
-                width="200"
-                class="img-thumbnail border-0"
-              />
+              <img src="img/img-BeepBeep.png" width="200" class="img-thumbnail border-0" />
             </div>
             <div class="modal-body mt-3">
               <p class="fw-bold" style="font-size: 1rem">Mengahapus Data Mobil</p>
@@ -141,11 +119,7 @@
             </div>
             <div class="modal-footer border-0 justify-content-center">
               <button type="submit" class="btn btn-primary-blue">Ya</button>
-              <button
-                type="button"
-                class="btn btn-primary-blue-border"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" class="btn btn-primary-blue-border" data-bs-dismiss="modal">
                 Tidak
               </button>
             </div>
@@ -153,4 +127,4 @@
         </div>
       </div>
     </div>
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>
